@@ -8,7 +8,7 @@ async function inserir(livro){
     await cliente.connect();
 
     const sql = await cliente.query("INSERT INTO livros(isbn, titulo, editora, autor, anopubli) VALUES($1, $2, $3, $4, $5) RETURNING*", [livro.isbn, livro.titulo, livro.editora, livro.autor, livro.anopubli]);
-
+    
     await cliente.end();
     return sql.rows[0];
 }
