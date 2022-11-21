@@ -22,7 +22,7 @@ async function buscarPorAutor(autor){
 
     await cliente.end();
 
-    return sql.rows[0];
+   return sql.rows[0];
 }
 
 async function buscarPorNome(livro){
@@ -74,7 +74,7 @@ async function deletar(isbn){
 }
 
 module.exports = {
-    inserir,  buscarPorAutor, buscarPorNome, atualizar, buscarPorDisponibilidade, deletar
+    inserir, buscarPorAutor, buscarPorNome, atualizar, buscarPorDisponibilidade, deletar
 }
 
 
