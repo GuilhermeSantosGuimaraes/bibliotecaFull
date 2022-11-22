@@ -13,6 +13,18 @@ async function inserir(livro){
     return sql.rows[0];
 }
 
+async function listar(){
+    const user = new Client(conexao);
+
+    await user.connect();
+
+    const sql = await user.query("SELECT * FROM livros");
+
+    await user.end();
+
+    return sql.rows;
+}
+
 async function buscarPorAutor(autor){
     const cliente = new Client(conexao);
     
@@ -74,7 +86,7 @@ async function deletar(isbn){
 }
 
 module.exports = {
-    inserir, buscarPorAutor, buscarPorNome, atualizar, buscarPorDisponibilidade, deletar
+    inserir, listar, buscarPorAutor, buscarPorNome, atualizar, buscarPorDisponibilidade, deletar,
 }
 
 

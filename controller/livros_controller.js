@@ -11,6 +11,17 @@ async function inserir(req, res){
     })
 }
 
+async function listar(req, res){
+    livroPersistencia.listar( (err, listaLivros) => {
+        if(err) { 
+            return res.status(500).json({erro: err});
+        }
+        else {
+            return res.json(listaLivros);
+        }  
+    } );
+}
+
 async function buscarPorAutor(req, res){
     const autor = req.params.autor;
 
@@ -96,5 +107,5 @@ async function deletar(req, res){
 }
 
 module.exports = {
-    inserir,  buscarPorAutor, buscarPorNome, buscarPorDisponibilidade, atualizar, deletar
+    inserir, listar, buscarPorAutor, buscarPorNome, buscarPorDisponibilidade, atualizar, deletar
 }
