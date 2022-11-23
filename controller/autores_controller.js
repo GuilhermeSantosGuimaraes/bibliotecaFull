@@ -24,7 +24,7 @@ async function listar(req, res){
 
 
 async function buscarPorId(req, res){
-    const id = req.params.idp;
+    const id = req.params.id;
 
     autorPersistencia.buscarPorId(id, (err, autor) =>{
         if(err){

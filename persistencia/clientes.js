@@ -26,6 +26,18 @@ async function listar(){
     return sql.rows;
 }
 
+async function buscarPorMatricula(matricula) {
+    const cliente = new Client(conexao);
+
+    await cliente.connect();
+
+    const sql = await cliente.query("SELECT * FROM clientes WHERE matricula = $1", [matricula]);
+
+    await cliente.end();
+
+    return sql.rows;
+}
+
 async function atualizar(matricula, cliente){
     const user = new Client(conexao);
 
@@ -52,5 +64,5 @@ async function deletar(matricula){
 
 
 module.exports = {
-    inserir, listar, locarLivro
+    inserir, listar, buscarPorMatricula, atualizar, deletar
 }
