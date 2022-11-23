@@ -26,27 +26,6 @@ async function listar(){
     return sql.rows;
 }
 
-async function locarLivro(qtdlivros, matricula, disp, isbn){
-    const user = new Client(conexao);
-
-    await user.connect();
-    //NÃO ESTA COMPLETO
-    const sql = await user.query("INSERT INTO locacao(locador, livro, fk_matricula, fk_isbn) VALUES(SELECT clientes.matricula, livros.isbn FROM clientes, livros JOIN locacao ON locacao.locador = clientes.nome JOIN locacao on locaco.livro = livros.titulo)", 
-                                    [matricula, isbn]);
-    const livro = await user.query("UPDATE livros SET disponibilidade = $1 WHERE isbn = $2", [disp.disponibilidade, isbn]);
-    const cliente = await user.query("UPDATE clientes SET qtdlivros = $1 WHERE matricula = $2", [qtdlivros.qtdlivros, matricula]);
-    
-    const date = new Date();
-    date.setDate(date.getDate() + 10)
-    console.log(`Livro locado, devolução na data: ${date.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-    })}`)
-    
-    await user.end();
-}
-
 async function atualizar(matricula, cliente){
     const user = new Client(conexao);
 

@@ -29,58 +29,71 @@ async function listar() {
                 JOIN autores
                 ON livros.idautor = autores.id`;
 
- await user.end();
+    await user.end();
 
-return sql.rows;}async function buscarPorAutor(autor) {
-const cliente = new Client(conexao);
+    return sql.rows;
+}
+async function buscarPorAutor(autor) {
+    const cliente = new Client(conexao);
 
-await cliente.connect();
+    await cliente.connect();
 
-const sql = await cliente.query("SELECT * FROM livros WHERE autor = $1", [autor]);
+    const sql = await cliente.query("SELECT * FROM livros WHERE autor = $1", [autor]);
 
-await cliente.end();
+    await cliente.end();
 
-return sql.rows[0];}async function buscarPorNome(livro) {
-const cliente = new Client(conexao);
+    return sql.rows[0];
+}
+async function buscarPorNome(livro) {
+    const cliente = new Client(conexao);
 
-await cliente.connect();
+    await cliente.connect();
 
-const sql = await cliente.query("SELECT * FROM livros WHERE nome = $1", [livro]);
+    const sql = await cliente.query("SELECT * FROM livros WHERE nome = $1", [livro]);
 
-await cliente.end();
+    await cliente.end();
 
-return sql.rows[0];}async function buscarPorDisponibilidade(livro) {
-const cliente = new Client(conexao);
+    return sql.rows[0];
+}
+async function buscarPorDisponibilidade(livro) {
+    const cliente = new Client(conexao);
 
-await cliente.connect();
+    await cliente.connect();
 
-const sql = await cliente.query("SELECT * FROM livros WHERE disponibilidade = $1", [livro]);
+    const sql = await cliente.query("SELECT * FROM livros WHERE disponibilidade = $1", [livro]);
 
-await cliente.end();
+    await cliente.end();
 
-return sql.rows[0];}async function atualizar(livro, disp) {
-const cliente = new Client(conexao);
+    return sql.rows[0];
+}
+async function atualizar(livro, disp) {
+    const cliente = new Client(conexao);
 
-await cliente.connect();
+    await cliente.connect();
 
-const sql = await cliente.query("UPDATE livros SET disponibilidade = $1 WHERE isbn = $2 RETURNING*", [livro.disponibilidade, disp]);
+    const sql = await cliente.query("UPDATE livros SET disponibilidade = $1 WHERE isbn = $2 RETURNING*", [livro.disponibilidade, disp]);
 
-await cliente.end();
+    await cliente.end();
 
-return sql.rows[0];}async function deletar(isbn) {
-const cliente = new Client(conexao)
+    return sql.rows[0];
+}
+async function deletar(isbn) {
+    const cliente = new Client(conexao)
 
-await cliente.connect();
+    await cliente.connect();
 
-const sql = await cliente.query('DELETE FROM livros WHERE isbn=$1 RETURNING *', [isbn]);
+    const sql = await cliente.query('DELETE FROM livros WHERE isbn=$1 RETURNING*', [isbn]);
 
-await cliente.end();
+    await cliente.end();
 
-return sql.rows[0];}module.exports = {
-inserir,
-listar,
-buscarPorAutor,
-buscarPorNome,
-atualizar,
-buscarPorDisponibilidade,
-deletar}
+    return sql.rows[0];
+}
+module.exports = {
+    inserir,
+    listar,
+    buscarPorAutor,
+    buscarPorNome,
+    atualizar,
+    buscarPorDisponibilidade,
+    deletar
+}
