@@ -2,7 +2,7 @@ const livroPersistencia = require ('../persistencia/livros')
 
 async function inserir(req, res){
     const livro = req.body;
-    livroPersistencia.inserir(livro, (err, livroCriado) =>{
+    await livroPersistencia.inserir(livro, (err, livroCriado) =>{
         if(err){
             return res.status(500).json({erro:err});
         }else{
@@ -12,7 +12,7 @@ async function inserir(req, res){
 }
 
 async function listar(req, res){
-    livroPersistencia.listar( (err, listaLivros) => {
+    await livroPersistencia.listar( (err, listaLivros) => {
         if(err) { 
             return res.status(500).json({erro: err});
         }
@@ -25,7 +25,7 @@ async function listar(req, res){
 async function buscarPorAutor(req, res){
     const autor = req.params.autor;
 
-    livroPersistencia.buscarPorAutor(autor, (err, livro) =>{
+    await livroPersistencia.buscarPorAutor(autor, (err, livro) =>{
         if(err){
             return res.status(500).json({erro:err}); 
         }else{
@@ -42,7 +42,7 @@ async function buscarPorAutor(req, res){
 async function buscarPorNome(req, res){
     const nome = req.params.nome;
 
-    livroPersistencia.buscarPorNome(nome, (err, livro) =>{
+    await livroPersistencia.buscarPorNome(nome, (err, livro) =>{
         if(err){
             return res.status(500).json({erro:err}); 
         }else{
@@ -58,7 +58,7 @@ async function buscarPorNome(req, res){
 async function buscarPorDisponibilidade(req, res){
     const disp = req.params.disp;
 
-    livroPersistencia.buscarPorDisponibilidade(disp, (err, livro) =>{
+    await livroPersistencia.buscarPorDisponibilidade(disp, (err, livro) =>{
         if(err){
             return res.status(500).json({erro:err}); 
         }else{
@@ -75,7 +75,7 @@ async function atualizar(req, res){
     const livro = req.body;
     const isbn = req.params.isbn;
 
-    livroPersistencia.atualizar(isbn, livro, (err, livroAtualizado) => {
+    await livroPersistencia.atualizar(isbn, livro, (err, livroAtualizado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }
@@ -92,7 +92,7 @@ async function atualizar(req, res){
 async function deletar(req, res){
     const isbn = req.params.isbn;
 
-    produtoPersistencia.deletar(isbn, (err, livroDeletado) => {
+    await livroPersistencia.deletar(isbn, (err, livroDeletado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }

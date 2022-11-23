@@ -2,7 +2,7 @@ const clientePersistencia = require ('../persistencia/clientes')
 
 async function inserir(req, res){
     const cliente = req.body;
-    clientePersistencia.inserir(cliente, (err, clienteCriado) =>{
+    await clientePersistencia.inserir(cliente, (err, clienteCriado) =>{
         if(err){
             return res.status(500).json({erro:err});
         }else{
@@ -12,7 +12,7 @@ async function inserir(req, res){
 }
 
 async function listar(req, res){
-    clientePersistencia.listar( (err, listaclientes) => {
+    await clientePersistencia.listar( (err, listaclientes) => {
         if(err) { 
             return res.status(500).json({erro: err});
         }
@@ -25,7 +25,7 @@ async function listar(req, res){
 async function buscarPorMatricula(req, res){
     const matricula = req.params.matricula;
 
-    autorPersistencia.buscarPorMatricula(matricula, (err, autor) =>{
+    await clientePersistencia.buscarPorMatricula(matricula, (err, autor) =>{
         if(err){
             return res.status(500).json({erro:err}); 
         }else{
@@ -42,7 +42,7 @@ async function atualizar(req, res){
     const cliente = req.body;
     const matricula = req.params.matricula;
 
-    clientePersistencia.atualizar(matricula, cliente, (err, clienteAtualizado) => {
+    await clientePersistencia.atualizar(matricula, cliente, (err, clienteAtualizado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }
@@ -59,7 +59,7 @@ async function atualizar(req, res){
 async function deletar(req, res){
     const matricula = req.params.matricula;
 
-    produtoPersistencia.deletar(matricula, (err, clienteDeletado) => {
+    await clientePersistencia.deletar(matricula, (err, clienteDeletado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }

@@ -2,7 +2,7 @@ const autorPersistencia = require ('../persistencia/autores')
 
 async function inserir(req, res){
     const autor = req.body;
-    autorPersistencia.inserir(autor, (err, autorCriado) =>{
+    await autorPersistencia.inserir(autor, (err, autorCriado) =>{
         if(err){
             return res.status(500).json({erro:err});
         }else{
@@ -12,7 +12,7 @@ async function inserir(req, res){
 }
 
 async function listar(req, res){
-    autorPersistencia.listar( (err, listaautors) => {
+    await autorPersistencia.listar( (err, listaautors) => {
         if(err) { 
             return res.status(500).json({erro: err});
         }
@@ -26,7 +26,7 @@ async function listar(req, res){
 async function buscarPorId(req, res){
     const id = req.params.id;
 
-    autorPersistencia.buscarPorId(id, (err, autor) =>{
+    await autorPersistencia.buscarPorId(id, (err, autor) =>{
         if(err){
             return res.status(500).json({erro:err}); 
         }else{
@@ -43,7 +43,7 @@ async function atualizar(req, res){
     const autor = req.body;
     const id = req.params.id;
 
-    autorPersistencia.atualizar(id, autor, (err, autorAtualizado) => {
+    await autorPersistencia.atualizar(id, autor, (err, autorAtualizado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }
@@ -60,7 +60,7 @@ async function atualizar(req, res){
 async function deletar(req, res){
     const id = req.params.id;
 
-    produtoPersistencia.deletar(id, (err, autorDeletado) => {
+    await autorPersistencia.deletar(id, (err, autorDeletado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }

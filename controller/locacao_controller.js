@@ -2,7 +2,7 @@ const locacaoPersistencia = require ('../persistencia/locacao')
 
 async function locarLivro(req, res){
     const locacao = req.body;
-    locacaoPersistencia.locarLivro(locacao, (err, locacaoCriado) =>{
+    await locacaoPersistencia.locarLivro(locacao, (err, locacaoCriado) =>{
         if(err){
             return res.status(500).json({erro:err});
         }else{
@@ -12,7 +12,7 @@ async function locarLivro(req, res){
 }
 
 async function listar(req, res){
-    locacaoPersistencia.listar( (err, listalocacao) => {
+    await locacaoPersistencia.listar( (err, listalocacao) => {
         if(err) { 
             return res.status(500).json({erro: err});
         }
@@ -25,7 +25,7 @@ async function listar(req, res){
 async function devolucao(req, res){
     const isbn = req.params.isbn;
 
-    locacaoPersistencia.devolucao(isbn, (err, locacaoDeletado) => {
+    await locacaoPersistencia.devolucao(isbn, (err, locacaoDeletado) => {
         if(err) {
             return res.status(500).json({erro: err});
         }
